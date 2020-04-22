@@ -1,0 +1,41 @@
+<style>
+  .textdeco
+  {
+    text-decoration-line: line-through;
+  }
+  .im{
+    height: 577px;
+    width:100%
+  }
+</style>
+<br><br>
+<div class="row">
+<div class="col-md-6 text-center">
+  <img  src={{item.image}} class="img-thumbnail" alt="shoes.jpg" class="im">
+</div>
+<div class="card" style="width: 30rem;">
+  <div class="card-header">
+   <h5>{{item.pName }}</h5>
+   <small>{{item.pCategory }}</small> 
+   <small>seller:<p>{{item.pSeller["sId"]}}</p></small>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"> <small>Description:</small><h3>{{item.pDescription}}</h3></li>
+    <li class="list-group-item" *ngIf="item['pCategory']!='books'"> <small>Specification</small><h6 >Color:{{item.color}}</h6></li>
+    <li class="list-group-item"><b>Rating</b>
+      <span class="badge badge-warning">{{item.pRating }}</span></li>
+     <li  class="list-group-item"><h5>Price</h5>
+      <p>{{finalprice | currency : 'INR' : 'symbol' : '.2' }}</p>
+      <p class="textdeco">{{item.price | currency : 'INR'}}</p></li> 
+      <li  class="list-group-item"><b>{{item.pSeller.pDiscount | percent }} Off + {{ item.pSeller.pShippingCharges }} shipping charges</b><br>
+      </li><li ><small>Availability: {{item.pSeller.pQuantity}}</small><br>
+      <small><b>Hurry up Deal lasts for few more hours!!</b></small></li>
+  
+     <li  class="list-group-item"> <button id="addtocart" type="submit" mat-raised-button color="accent" (click)="proceedtocart(item)">Add to Cart</button>
+    &nbsp;&nbsp;
+    <button type="submit" mat-raised-button color="accent" (click)="goback()">Go Back</button> &nbsp;&nbsp;
+  </li>
+  </ul>
+</div>
+</div>
+<!-- // *ngIf="item['pSeller.pQuantity']!=0;else failureMsg" -->

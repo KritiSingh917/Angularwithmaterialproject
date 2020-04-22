@@ -1,0 +1,16 @@
+.example-fill-remaining-space {
+    flex: 1 1 auto;
+  }
+  .mat-tab{
+
+  
+   height: '100%';
+   position : 'absolute';
+   justify-content : 'space-between'; 
+ }
+.colorIt{
+  background-color:rgba(205, 220, 57, 0.7) ;
+}
+mat-icon{
+  cursor:pointer;
+}

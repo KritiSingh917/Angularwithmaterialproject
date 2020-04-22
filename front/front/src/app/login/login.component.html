@@ -1,0 +1,38 @@
+<br><br><br>
+  <div fxFlexOffset="50%" fxFlex="50%" class="col-3">
+    <mat-card>
+      <br>
+      <mat-card-header class="text-center">
+      <div class="text-center"><mat-card-title>Login to Continue Shopping</mat-card-title></div>
+      </mat-card-header>
+      <mat-card-content class="text-center">
+        <form (ngSubmit)="login()">
+          <div class="example-container">
+            <mat-form-field>
+              <mat-label>Enter EmailId</mat-label>
+              <input matInput id="userEmail" placeholder="Example@gmail.com" [formControl]="email">
+           
+              <mat-error *ngIf="email.invalid">{{getErrorMessage("email")}}</mat-error>
+              <mat-error *ngIf="email.required">Email is required</mat-error>
+            </mat-form-field>
+          </div>
+          <div >
+            <mat-form-field >
+              <mat-label>Enter your password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" id="userPassword"  [formControl]="password">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="password.invalid">{{getErrorMessage("password")}}.Try Again!!</mat-error>
+            </mat-form-field>
+
+          </div>
+     <div>
+        <button id="signin" mat-flat-button class="example-full-width" [disabled]="email.invalid || password.invalid" type="submit" color="accent">Login</button>
+     </div>
+     <div class="text-success" *ngIf="successMessage">{{successMessage}}</div>
+     <div class="text-danger" *ngIf="errorMessage">{{errorMessage }}</div>
+        </form>
+      </mat-card-content> 
+    </mat-card>
+  </div>

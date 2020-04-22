@@ -1,0 +1,84 @@
+<div class="row" >
+  <div class="col-md-4 offset-md-4">
+    <div class="card bg-basic text-dark">
+      <div class="card-body">
+        <div class="card-title">
+          <h3>Create an account</h3>
+        </div>
+
+
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
+          <div>
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" formControlName="uName" placeholder="John Smith" class="form-control" id="username">
+              <div id="usernameError">
+                <span class="text-danger"
+                  *ngIf="registerForm.controls.uName.touched && registerForm.controls.uName.errors?.required">Field
+                  required</span>
+                <span class="text-danger" *ngIf="registerForm.controls.uName.errors?.pattern  && registerForm.controls.uName.dirty">Username
+                  can have only alphabets and spaces</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="dob">Date of Birth</label>
+              <input type="date" class="form-control" placeholder="02/01/2000" formControlName="uDOB" id="dob">
+              <div id="dobError">
+                <span class="text-danger"
+                  *ngIf="registerForm.controls.uDOB.touched && registerForm.controls.uDOB.errors?.required">Field
+                  required</span>
+                <span class="text-danger" *ngIf="registerForm.controls.uDOB.errors  && registerForm.controls.uDOB.dirty">Enter a valid date of
+                  birth</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="mobileno">Mobile Number</label>
+              <input type="number" class="form-control" placeholder="8562147895" formControlName="uPhone" id="mobileno">
+              <div id="mobilenoError">
+                <span class="text-danger"
+                  *ngIf="registerForm.controls.uPhone.touched && registerForm.controls.uPhone.errors?.required">Field
+                  required</span>
+                <span class="text-danger" *ngIf="registerForm.controls.uPhone.errors?.pattern && registerForm.controls.uPhone.dirty">Enter
+                  a valid mobile number</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="emailid">Email Address</label>
+              <input type="email" class="form-control" placeholder="johnsmith@gmail.com" formControlName="uEmail" id="emailid">
+              <div id="emailidError">
+                <span class="text-danger"
+                  *ngIf="registerForm.controls.uEmail.touched && registerForm.controls.uEmail.errors?.required">Field
+                  required</span>
+                <span class="text-danger" *ngIf="registerForm.controls.uEmail.errors && registerForm.controls.uEmail.dirty">Enter a valid Email Id</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="pwd">Password</label>
+              <input type="password" class="form-control" placeholder="Johnsmith@123" formControlName="uPass" id="pwd">
+              <div id="pwdError">
+                <span class="text-danger"
+                  *ngIf="registerForm.controls.uPass.touched && registerForm.controls.uPass.errors?.required">Field
+                  required</span>
+                <span class="text-danger" *ngIf="registerForm.controls.uPass.errors && registerForm.controls.uPass.dirty">Password must include
+                  atleast one capital letter, 1 digit and 1 special character (@$!%*?&)</span>
+              </div>
+            </div><br>
+
+            <div>
+              <label>
+                <button type="submit" id="register" class="btn btn-primary" [disabled]="registerForm.invalid">REGISTER</button>
+              </label>
+            </div>
+          </div>
+
+        </form>
+        <span *ngIf="successMsg" class="text-success">{{ successMsg }}</span>
+        <span *ngIf="errorMsg" class="text-danger">{{ errorMsg }}</span>
+      </div>
+    </div>
+  </div>
+</div>

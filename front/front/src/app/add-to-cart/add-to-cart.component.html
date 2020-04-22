@@ -1,0 +1,134 @@
+
+<!-- line 11 // *ngIf="!flag" -->
+
+<div *ngIf="flag2">
+  <!-- <h1>This is cart</h1> -->
+<div class="container" class="row"  style="margin-top: 40px">
+<div  class="col-md-7 offset-md-2"> 
+  <div   *ngFor="let i of items">
+    <div class="card bg-basic text-dark" style="background-color: #e3f2fd;">
+      <div class="card-body">
+        <div class="text-center">
+        </div>
+        <small class="btn-warning">{{items.length}} products in your cart!!!</small>
+        <table class="table"  style="background-color: #e3f2fd;">
+          <thead>
+            <tr>
+              <th>
+                Item
+              </th>
+              <th>
+                Quantity 
+              </th>
+              <th>
+               After Discount Price for each
+              </th>
+              <!-- <th>
+                Products left in stock
+              </th> -->
+              <th>
+                Remove from Cart
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr > add here for items in case of error -->
+            <tr>
+              <td>
+               <b> {{ i.pName }}</b>
+              </td>
+              <td>
+                 <!-- {{ i.pQuantity }}  -->
+                 <input type="number" placeholder="1" (keyup)="checking(i)" [(ngModel)]="i.pQuantity" (change)="calculateamount()" *ngIf="!i.pQuantity<=0 ;else failureMsg">
+                 <ng-template #failureMsg>
+                  <div><span class="text-danger">quantity should be more than 0</span>
+                  <button  type="submit" mat-button class="btn btn-sm btn-warning" (click)="display=true">Try Again</button></div>
+                  <input type="number" placeholder="1" (keyup)="checking(i)" [(ngModel)]="i.pQuantity" *ngIf="display==true">
+                </ng-template>
+                </td>
+              <td>
+                {{ i.price | currency : 'INR' : 'symbol' : '.2' }}
+              </td>
+              <td>
+                <button type="submit" mat-button class="btn btn-warning"  (click)="deletetest(i)">Delete</button>&nbsp;
+                  <!-- <i class="material-icons">delete</i> -->
+                  <button type="submit" mat-button class="btn btn-warning"  (click)="show_detail_click()">Order Details</button>
+              </td>
+            </tr>
+         
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<br>
+<br>
+<div class="container" class="row" >
+  <div  class="col-md-7 offset-md-2"> 
+<div *ngIf="show_details">
+<div *ngIf="!flag">
+    <div class="card bg-basic text-dark" style="background-color: #e3f2fd;">
+      <div class="card-body">
+        <div class="text-center text-info">
+          <h2>Price Details:</h2>
+        </div>
+        <table class="table">
+          <tr>
+            <thead>
+              <tr>
+                <th>
+                  Cart Total (MRP):
+                </th>
+              </tr>
+            </thead>
+            <td>
+              {{ amount | currency : 'INR' : 'symbol' : '.2' }}
+            </td>
+          </tr>
+          <tr>
+            <thead>
+              <tr>
+                <th>
+                  Total Tax (17% by default):
+                </th>
+              </tr>
+            </thead>
+            <td>
+              {{ tax | currency : 'INR' : 'symbol' : '.2' }}
+            </td>
+          </tr>
+          <tr>
+            <thead>
+              <tr>
+                <th>
+                  Total Amount:
+                </th>
+              </tr>
+            </thead>
+            <td>
+              {{ totalamount | currency : 'INR' : 'symbol' : '.2' }}
+            </td>
+          </tr>
+        </table>
+        <button type="submit" [disabled]="matching" class="btn btn-warning offset-5" (click)="checkout()" id="checkout">Checkout</button>
+        <p *ngIf="matching" class="text-danger">Enter a valid Quantity</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<div *ngIf="flag && !items"  class="text-center">
+  <div class="col-md-4 offset-4"  style="margin-top: 10%">
+  <div class="card" style="background-color: #e3f2fd;"><h2>Cart is empty,Now!</h2>&nbsp;
+    <button  [routerLink]="['/dashboard']"  type="submit" mat-button class="btn btn-sm btn-warning">Continue Shopping</button>
+  </div>
+</div>
+</div>
+<div class="text-success" *ngIf="successMessage!=null">{{ successMsg }}</div>
+<div class="text-success" *ngIf="errorMessage!=null">{{ errormessage }}</div>
+</div>
+

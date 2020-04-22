@@ -1,0 +1,52 @@
+<style>
+  .hover{
+    cursor: pointer;
+  }
+</style>
+<mat-toolbar class="colorIt">
+  <span *ngIf="!flag">
+    <button mat-raised-button color="accent" class="navbar-brand"><i
+        (click)= "call()" class="material-icons" title="Home">home</i>
+    </button>
+  </span>
+  <span> &nbsp;&nbsp;&nbsp; <mat-form-field>
+      <input id="searchbar" class="searchIcon" type="text" matInput [(ngModel)]="searchKey" (change)="searchProducts(searchKey)">
+        <mat-icon id="searchbtn" [routerLink]="['/search',searchKey]" class="hover" title="Search">search</mat-icon>
+    </mat-form-field>
+ 
+  </span>
+
+  <span class="example-fill-remaining-space"></span>
+  <small *ngIf="userId">{{ userId }}</small>
+  &nbsp;&nbsp;
+  <span>
+  
+    <button  id="cart"  mat-raised-button color="accent" *ngIf="userId" [routerLink]="['/cart']" (click)="hideContent()"  title="Shopping Cart">Cart</button>
+  </span>
+  &nbsp; &nbsp;
+  <span>
+  
+    <button mat-raised-button color="accent" [routerLink]="['/order-history']"  title="Orders" (click)="hideContent()" *ngIf="userId">Orders</button>
+  </span>
+  &nbsp;
+  <span>
+    <button mat-raised-button color="accent"  [routerLink]="['/login']" *ngIf="!userId" (click)="hideContent()" title="Login">Login</button>
+  </span>
+  <span>
+    <!-- &nbsp;&nbsp; -->
+    &nbsp;&nbsp;
+    <button mat-raised-button color="accent" title="Logout" *ngIf="userId" (click)="logout()">LogOut</button>
+  </span>
+</mat-toolbar>
+<router-outlet></router-outlet>
+
+<div class="col-sm-4 offset-4"  style="text-align: center; margin-top: 80px;">
+  <div  class="jumbotron text-center"  *ngIf="!userId && show_wel ; else failureMsg" style="background-color: #a0d2f5;">
+    <h2 class="display 4">Login to Purchase Items</h2>
+  </div>
+</div>
+  <ng-template #failureMsg>
+  <div *ngIf="poster_show && userId" class="jumbotron text-center">
+    <h2 class="display 4">Welcome to StyleMe</h2>
+  </div>
+</ng-template>
