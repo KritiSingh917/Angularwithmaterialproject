@@ -29,7 +29,7 @@
     "istanbul": "^0.4.5",
     "jasmine": "^3.4.0",
     "jasmine-node": "^3.0.0",
-    "jasmine-reporters": "^2.3.2",
+    "jasmine-reporters": "^2.5.0",
     "tslint": "^5.18.0"
   }
 }
